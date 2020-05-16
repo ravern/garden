@@ -8,8 +8,7 @@ const heading = {
 export const base = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
-    body:
-      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
+    body: "Inter, sans-serif",
     heading: "inherit",
     monospace: "Menlo, monospace",
   },
@@ -26,9 +25,33 @@ export const base = {
   colors: {
     text: "#000",
     background: "#fff",
-    primary: "#07c",
+    primary: "#06a",
     secondary: "#30c",
-    muted: "#f6f6f6",
+    lightGray: "#f6f6f6",
+    darkGray: "#a2a2a2",
+  },
+  links: {
+    nav: {
+      textDecoration: "underline",
+      color: "primary",
+      fontSize: 2,
+      fontWeight: "body",
+      cursor: "pointer",
+    },
+  },
+  buttons: {
+    primary: {
+      bg: "background",
+      color: "text",
+      borderWidth: 2,
+      borderStyle: "solid",
+      borderColor: "darkGray",
+      fontFamily: "body",
+      fontWeight: "body",
+      fontSize: 2,
+      px: 2,
+      py: 1,
+    },
   },
   styles: {
     root: {
