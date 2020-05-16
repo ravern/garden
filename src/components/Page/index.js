@@ -1,8 +1,9 @@
 /** @jsx jsx */
 
 import { useState } from "react";
-import { Box, Input, jsx } from "theme-ui";
+import { Box, Grid, Input, jsx } from "theme-ui";
 
+import BackLink from "./components/BackLink";
 import Editor from "./components/Editor";
 
 const initialValue = [
@@ -27,6 +28,10 @@ export default function Page() {
     >
       <Input placeholder="Title" />
       <Editor value={value} onChange={setValue} />
+      <Grid gap={2} columns={2}>
+        <BackLink />
+        <BackLink />
+      </Grid>
     </Box>
   );
 }
