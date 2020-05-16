@@ -14,6 +14,7 @@
     "react": "16.13.1",
     "react-custom-scrollbars": "^4.2.1",
     "react-dom": "16.13.1",
+    "react-no-ssr": "^1.1.0",
     "reakit": "^1.0.2",
     "slate": "^0.58.1",
     "slate-history": "^0.58.1",

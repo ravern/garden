@@ -1,10 +1,9 @@
-import { css, Global } from "@emotion/core";
 import Head from "next/head";
 import { Provider as ReakitProvider } from "reakit";
 import { ThemeProvider } from "theme-ui";
 
 import Layout from "~/components/Layout";
-import theme from "~/theme";
+import theme from "~/constants/theme";
 
 export default function App({ Component, pageProps }) {
   return (
