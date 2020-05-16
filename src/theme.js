@@ -22,6 +22,11 @@ export default {
     secondary: "#30c",
     muted: "#f6f6f6",
   },
+  buttons: {
+    primary: {
+      fontFamily: "body",
+    },
+  },
   styles: {
     root: {
       fontFamily: "body",
