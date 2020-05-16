@@ -46,6 +46,7 @@ export const base = {
       borderWidth: 2,
       borderStyle: "solid",
       borderColor: "darkGray",
+      borderRadius: 8,
       fontFamily: "body",
       fontWeight: "body",
       fontSize: 2,
