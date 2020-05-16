@@ -1,0 +1,30 @@
+type User {
+  id: ID!
+  username: String! @search(by: [exact])
+  email: String! @search(by: [exact])
+  password: String!
+  gardens: [Garden!]! @hasInverse(field: users)
+}
+
+type Garden {
+  id: ID!
+  name: String!
+  pages: [Page!]! @hasInverse(field: garden)
+  users: [User!]!
+}
+
+type Page {
+  id: ID!
+  title: String! @search(by: [term])
+  garden: Garden!
+  nodes: [Node!]! @hasInverse(field: page)
+  backlinks: [Node!]! 
+}
+
+type Node {
+  id: ID!
+  text: String! @search(by: [fulltext])
+  content: String
+  links: [Page!]! @hasInverse(field: backlinks)
+  page: Page!
+}
