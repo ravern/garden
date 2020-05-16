@@ -1,4 +1,6 @@
+import { css, Global } from "@emotion/core";
 import Head from "next/head";
+import { Provider as ReakitProvider } from "reakit";
 import { ThemeProvider } from "theme-ui";
 
 import Layout from "~/components/Layout";
@@ -11,11 +13,13 @@ export default function App({ Component, pageProps }) {
         <link href="https://rsms.me/inter/inter.css" rel="stylesheet" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </Head>
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <ReakitProvider>
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </ReakitProvider>
     </>
   );
 }

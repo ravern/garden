@@ -1,10 +1,13 @@
-import { Heading, Text } from "theme-ui";
+import { Flex, Heading, Text } from "theme-ui";
+
+import Page from "~/components/Page";
 
 export default function Home() {
   return (
-    <>
-      <Heading as="h1">Raverns Working Notes</Heading>
-      <Text>Testing 1 2 3</Text>
-    </>
+    <Flex sx={{ flexDirection: "row", overflowX: "scroll", flexGrow: "1" }}>
+      <Page />
+      <Page />
+      <Page />
+    </Flex>
   );
 }

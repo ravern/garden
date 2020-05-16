@@ -1,7 +1,15 @@
-export default {
+const heading = {
+  color: "text",
+  fontFamily: "heading",
+  lineHeight: "heading",
+  fontWeight: "heading",
+};
+
+export const base = {
   space: [0, 4, 8, 16, 32, 64, 128, 256, 512],
   fonts: {
-    body: "Inter, sans-serif",
+    body:
+      'system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif',
     heading: "inherit",
     monospace: "Menlo, monospace",
   },
@@ -22,11 +30,6 @@ export default {
     secondary: "#30c",
     muted: "#f6f6f6",
   },
-  buttons: {
-    primary: {
-      fontFamily: "body",
-    },
-  },
   styles: {
     root: {
       fontFamily: "body",
@@ -34,45 +37,27 @@ export default {
       fontWeight: "body",
     },
     h1: {
-      color: "text",
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
+      ...heading,
       fontSize: 5,
     },
     h2: {
-      color: "text",
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
+      ...heading,
       fontSize: 4,
     },
     h3: {
-      color: "text",
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
+      ...heading,
       fontSize: 3,
     },
     h4: {
-      color: "text",
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
+      ...heading,
       fontSize: 2,
     },
     h5: {
-      color: "text",
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
+      ...heading,
       fontSize: 1,
     },
     h6: {
-      color: "text",
-      fontFamily: "heading",
-      lineHeight: "heading",
-      fontWeight: "heading",
+      ...heading,
       fontSize: 0,
     },
     p: {
@@ -113,3 +98,5 @@ export default {
     },
   },
 };
+
+export default base;

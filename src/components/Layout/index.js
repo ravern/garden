@@ -1,10 +1,12 @@
-import NavigationBar from "~/components/NavigationBar";
+import { Flex } from "theme-ui";
+
+import NavigationBar from "./components/NavigationBar";
 
 export default function Layout({ children }) {
   return (
-    <div>
+    <Flex sx={{ flexDirection: "column", height: "100vh" }}>
       <NavigationBar />
       {children}
-    </div>
+    </Flex>
   );
 }
