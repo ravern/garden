@@ -24,12 +24,7 @@ export default async function login(_obj, { input }, { db }) {
     throw new Error("invalid credentials");
   }
 
-  const token = jwt.sign(
-    {
-      id: user.id,
-    },
-    process.env.JWT_SECRET
-  );
+  const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
   return {
     token,
