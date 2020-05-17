@@ -6,13 +6,22 @@ const typeDefs = gql`
   }
 
   type Mutation {
-    login(input: LoginInput!): LoginPayload!
-    register(input: RegisterInput!): RegisterPayload!
+    login(input: LoginInput!): LoginResult!
+    register(input: RegisterInput!): RegisterResult!
+  }
+
+  type Error {
+    message: String!
   }
 
   input LoginInput {
     emailOrUsername: String!
     password: String!
+  }
+
+  type LoginResult {
+    data: LoginPayload
+    error: Error
   }
 
   type LoginPayload {
@@ -26,9 +35,20 @@ const typeDefs = gql`
     password: String!
   }
 
+  type RegisterResult {
+    data: RegisterPayload
+    error: RegisterError
+  }
+
   type RegisterPayload {
     token: String!
     user: User!
+  }
+
+  type RegisterError {
+    email: String
+    username: String
+    password: String
   }
 
   type User {

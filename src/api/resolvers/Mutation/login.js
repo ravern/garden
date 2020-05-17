@@ -1,6 +1,5 @@
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import isNil from "lodash/isNil";
 
 export default async function login(_obj, { input }, { db }) {
   const { emailOrUsername, password } = input;
@@ -16,18 +15,28 @@ export default async function login(_obj, { input }, { db }) {
     })
     .first();
 
-  if (isNil(user)) {
-    throw new Error("invalid credentials");
+  if (!user) {
+    return {
+      error: {
+        message: "Invalid credentials",
+      },
+    };
   }
 
   if (!(await bcrypt.compare(password, user.password))) {
-    throw new Error("invalid credentials");
+    return {
+      error: {
+        message: "Invalid credentials",
+      },
+    };
   }
 
   const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET);
 
   return {
-    token,
-    user,
+    data: {
+      token,
+      user,
+    },
   };
 }
