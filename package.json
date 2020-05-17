@@ -14,6 +14,7 @@
     "apollo-link-http": "^1.5.17",
     "apollo-server-micro": "^2.13.1",
     "auth-header": "^1.0.0",
+    "bcryptjs": "^2.4.3",
     "connect": "^3.7.0",
     "cors": "^2.8.5",
     "graphql-tag": "^2.10.3",

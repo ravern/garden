@@ -2,11 +2,39 @@ import gql from "graphql-tag";
 
 const typeDefs = gql`
   type Query {
-    test: Boolean
+    currentUser: User!
   }
 
   type Mutation {
-    test: Boolean
+    login(input: LoginInput!): LoginPayload!
+    register(input: RegisterInput!): RegisterResult!
+  }
+
+  input LoginInput {
+    emailOrUsername: String!
+    password: String!
+  }
+
+  type LoginPayload {
+    token: String!
+    user: User!
+  }
+
+  input RegisterInput {
+    email: String!
+    username: String!
+    password: String!
+  }
+
+  type RegisterInput {
+    token: String!
+    user: User!
+  }
+
+  type User {
+    id: ID!
+    email: String!
+    username: String!
   }
 `;
 
