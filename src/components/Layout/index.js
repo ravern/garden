@@ -1,10 +1,10 @@
-import { Flex } from "theme-ui";
+import { Flex } from "@chakra-ui/core";
 
 import NavigationBar from "./components/NavigationBar";
 
 export default function Layout({ children }) {
   return (
-    <Flex sx={{ flexDirection: "column", height: "100vh" }}>
+    <Flex direction="column" height="100vh">
       <NavigationBar />
       {children}
     </Flex>

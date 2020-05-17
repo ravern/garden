@@ -1,50 +1,42 @@
-/** @jsx jsx */
-
+import { Button, Heading, Link, Stack, useDisclosure } from "@chakra-ui/core";
 import NextLink from "next/link";
-import { DialogDisclosure, useDialogState } from "reakit/Dialog";
-import { Box, Button, Heading, jsx, NavLink } from "theme-ui";
 
-import Stack from "~/components/core/Stack";
-import SignUpDialog from "~/components/SignUpDialog";
+import SignUpModal from "./components/SignUpModal";
 
 export default function NavigationBar() {
-  const signUpDialog = useDialogState();
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
     <>
-      <Stack
-        p={2}
-        sx={{
-          borderBottom: "2px solid",
-          borderBottomColor: "lightGray",
-        }}
-      >
-        <Stack gap={2} align="center" sx={{ flexGrow: 1 }}>
-          <Box>
-            <NextLink href="/">
-              <Heading as="h1" sx={{ fontSize: 3 }}>
-                {"Ravern's Working Notes"}
-              </Heading>
-            </NextLink>
-          </Box>
-          <Box>
-            <NextLink href="/">
-              <NavLink>About these pages</NavLink>
-            </NextLink>
-          </Box>
+      <Stack p={2} direction="row">
+        <Stack
+          spacing={2}
+          align="center"
+          direction="row"
+          flexGrow="1"
+          shouldWrapChildren
+        >
+          <NextLink href="/">
+            <Heading as="h1" m={0} size="md">
+              {"Ravern's Working Notes"}
+            </Heading>
+          </NextLink>
+          <NextLink href="/">
+            <Link textDecor="underline" color="primary">
+              About these pages
+            </Link>
+          </NextLink>
         </Stack>
-        <Stack gap={2} align="center">
-          <Box>
-            <NextLink href="/">
-              <NavLink>Settings</NavLink>
-            </NextLink>
-          </Box>
-          <DialogDisclosure as={Button} {...signUpDialog}>
-            Sign up
-          </DialogDisclosure>
+        <Stack spacing={2} align="center" direction="row" shouldWrapChildren>
+          <NextLink href="/">
+            <Link textDecor="underline" color="primary">
+              Settings
+            </Link>
+          </NextLink>
+          <Button onClick={onOpen}>Sign up</Button>
         </Stack>
       </Stack>
-      <SignUpDialog {...signUpDialog} />
+      <SignUpModal isOpen={isOpen} onClose={onClose} />
     </>
   );
 }
