@@ -17,6 +17,7 @@
     "bcryptjs": "^2.4.3",
     "connect": "^3.7.0",
     "cors": "^2.8.5",
+    "dataloader": "^2.0.0",
     "graphql-tag": "^2.10.3",
     "is-hotkey": "^0.1.6",
     "jsonwebtoken": "^8.5.1",

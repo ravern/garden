@@ -35,6 +35,19 @@ const typeDefs = gql`
     id: ID!
     email: String!
     username: String!
+    userGardens: [UserGarden!]!
+  }
+
+  type UserGarden {
+    id: ID!
+    user: User!
+    garden: Garden!
+  }
+
+  type Garden {
+    id: ID!
+    name: String!
+    userGardens: [UserGarden!]!
   }
 `;
 
