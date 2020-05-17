@@ -47,7 +47,14 @@ const typeDefs = gql`
   type Garden {
     id: ID!
     name: String!
+    pages: [Page!]!
     userGardens: [UserGarden!]!
+  }
+
+  type Page {
+    id: ID!
+    title: String!
+    garden: Garden!
   }
 `;
 
