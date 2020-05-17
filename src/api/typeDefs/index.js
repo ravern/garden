@@ -7,7 +7,7 @@ const typeDefs = gql`
 
   type Mutation {
     login(input: LoginInput!): LoginPayload!
-    register(input: RegisterInput!): RegisterResult!
+    register(input: RegisterInput!): RegisterPayload!
   }
 
   input LoginInput {
@@ -26,7 +26,7 @@ const typeDefs = gql`
     password: String!
   }
 
-  type RegisterInput {
+  type RegisterPayload {
     token: String!
     user: User!
   }

@@ -9,11 +9,11 @@ export default async function getUser({ req }) {
     ? parse(req.headers.authorization)
     : {};
 
-  if (scheme !== "Bearer") {
+  if (scheme?.toUpperCase() !== "BEARER") {
     return null;
   }
 
   const { id } = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  return db.getUser(id);
+  return db.select("*").from("users").where({ id }).first();
 }
