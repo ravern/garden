@@ -1,16 +1,15 @@
 import "prosemirror-view/style/prosemirror.css";
 
 import { ApolloProvider } from "@apollo/react-hooks";
-import { CSSReset } from "@chakra-ui/core";
-import { css, Global } from "@emotion/core";
+import { ThemeProvider } from "@xstyled/styled-components";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { ApolloClient } from "apollo-client";
 import { HttpLink } from "apollo-link-http";
-import { ThemeProvider } from "emotion-theming";
 import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 
 import Layout from "~/components/Layout";
+import Styles from "~/components/Styles";
 import theme from "~/constants/theme";
 
 const cache = new InMemoryCache();
@@ -34,8 +33,7 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
-          <Global styles={globalStyles} />
-          <CSSReset />
+          <Styles />
           <Layout>
             <Component {...pageProps} />
           </Layout>
@@ -44,9 +42,3 @@ export default function App({ Component, pageProps }) {
     </>
   );
 }
-
-const globalStyles = css`
-  html {
-    // font-size: 62.5%;
-  }
-`;

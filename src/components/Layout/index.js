@@ -1,12 +1,12 @@
-import { Flex } from "@chakra-ui/core";
+import Stack from "~/components/core/Stack";
 
 import NavigationBar from "./components/NavigationBar";
 
 export default function Layout({ children }) {
   return (
-    <Flex direction="column" height="100vh">
-      <NavigationBar />
-      {children}
-    </Flex>
+    <Stack variant="column" gap={2}>
+      <div>Hello</div>
+      <div>World</div>
+    </Stack>
   );
 }

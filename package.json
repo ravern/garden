@@ -13,6 +13,8 @@
     "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27",
+    "@xstyled/styled-components": "^1.17.1",
+    "@xstyled/system": "^1.17.1",
     "apollo-cache-inmemory": "^1.6.6",
     "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
@@ -53,6 +55,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
+    "babel-plugin-styled-components": "^1.10.7",
     "dotenv": "^8.2.0",
     "eslint": "^7.0.0",
     "eslint-config-prettier": "^6.11.0",
@@ -60,6 +63,7 @@
     "eslint-plugin-react": "^7.20.0",
     "eslint-plugin-simple-import-sort": "^5.0.3",
     "prettier": "^2.0.5",
+    "styled-components": "^5.1.0",
     "webpack-merge": "^4.2.2"
   }
 }

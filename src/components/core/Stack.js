@@ -1,28 +1,29 @@
-/** @jsx jsx */
+import styled, { css } from "@xstyled/styled-components";
 
-import { Children, cloneElement } from "react";
-import { Flex, jsx } from "theme-ui";
+const Stack = styled.div`
+  ${({ variant, align, justify, gap }) => {
+    if (variant === "column") {
+      return css`
+        flex-direction: column;
+        justify-content: ${justify};
+        align-items: ${align};
 
-export default function Stack({ children, ...props }) {
-  const { gap, direction, justify, align } = props;
+        & > * + * {
+          margin-top: ${gap};
+        }
+      `;
+    } else {
+      return css`
+        flex-direction: row;
+        justify-content: ${justify};
+        align-items: ${align};
 
-  return (
-    <Flex
-      {...props}
-      sx={{
-        flexDirection: direction,
-        justifyContent: justify,
-        alignItems: align,
-      }}
-    >
-      {Children.map(children, (child, index) =>
-        cloneElement(
-          child,
-          direction === "column"
-            ? { mt: index === 0 ? 0 : gap }
-            : { ml: index === 0 ? 0 : gap }
-        )
-      )}
-    </Flex>
-  );
-}
+        & > * + * {
+          margin-left: ${gap};
+        }
+      `;
+    }
+  }}
+`;
+
+export default Stack;
