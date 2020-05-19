@@ -1,13 +1,11 @@
-import { Flex, Heading, Text } from "theme-ui";
+import { Stack } from "@chakra-ui/core";
 
 import Page from "~/components/Page";
 
 export default function Home() {
   return (
-    <Flex sx={{ flexDirection: "row", overflowX: "scroll", flexGrow: "1" }}>
+    <Stack align="center">
       <Page />
-      <Page />
-      <Page />
-    </Flex>
+    </Stack>
   );
 }

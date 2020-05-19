@@ -1,3 +1,5 @@
+import "prosemirror-view/style/prosemirror.css";
+
 import { ApolloProvider } from "@apollo/react-hooks";
 import { CSSReset } from "@chakra-ui/core";
 import { css, Global } from "@emotion/core";
