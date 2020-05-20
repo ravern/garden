@@ -16,5 +16,5 @@ export default function Page() {
 const Input = styled.input`
   border: none;
   font-weight: 600;
-  font-size: 5;
+  font-size: 6;
 `;

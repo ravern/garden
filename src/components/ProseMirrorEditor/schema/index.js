@@ -6,8 +6,8 @@ import {
 
 const nodes = {
   doc: basicNodes.doc,
-  heading: basicNodes.heading,
   paragraph: basicNodes.paragraph,
+  heading: basicNodes.heading,
   text: basicNodes.text,
 };
 
