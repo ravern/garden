@@ -8,6 +8,7 @@ export default keymap({
   ...baseKeymap,
 
   "Mod-y": redo,
+  "Mod-Shift-z": redo,
   "Mod-z": undo,
 
   "Mod-b": toggleMark(schema.marks.strong),

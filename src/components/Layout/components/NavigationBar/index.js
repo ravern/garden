@@ -1,42 +1,26 @@
-import { Button, Heading, Link, Stack, useDisclosure } from "@chakra-ui/core";
 import NextLink from "next/link";
+
+import Stack from "~/components/core/Stack";
 
 import SignUpModal from "./components/SignUpModal";
 
 export default function NavigationBar() {
-  const { isOpen, onClose, onOpen } = useDisclosure();
-
   return (
-    <>
-      <Stack p={2} direction="row">
-        <Stack
-          spacing={2}
-          align="center"
-          direction="row"
-          flexGrow="1"
-          shouldWrapChildren
-        >
-          <NextLink href="/">
-            <Heading as="h1" m={0} size="md">
-              {"Ravern's Working Notes"}
-            </Heading>
-          </NextLink>
-          <NextLink href="/">
-            <Link textDecor="underline" color="primary">
-              About these pages
-            </Link>
-          </NextLink>
-        </Stack>
-        <Stack spacing={2} align="center" direction="row" shouldWrapChildren>
-          <NextLink href="/">
-            <Link textDecor="underline" color="primary">
-              Settings
-            </Link>
-          </NextLink>
-          <Button onClick={onOpen}>Sign up</Button>
-        </Stack>
+    <Stack gap={2}>
+      <Stack gap={2} alignItems="center" flex={1}>
+        <NextLink href="/">
+          <h1>{"Ravern's Working Notes"}</h1>
+        </NextLink>
+        <NextLink href="/">
+          <a>About these pages</a>
+        </NextLink>
       </Stack>
-      <SignUpModal isOpen={isOpen} onClose={onClose} />
-    </>
+      <Stack gap={2} alignItems="center">
+        <NextLink href="/">
+          <a>Settings</a>
+        </NextLink>
+        <button>Sign up</button>
+      </Stack>
+    </Stack>
   );
 }

@@ -1,4 +1,3 @@
-import { Stack } from "@chakra-ui/core";
 import { useEffect, useRef } from "react";
 
 import { buildView } from "./view";
@@ -15,5 +14,5 @@ export default function ProseMirrorEditor({ value, onChange }) {
     }
   }, [editor]);
 
-  return <Stack spacing={3} ref={editor} />;
+  return <article ref={editor} />;
 }

@@ -1,12 +1,13 @@
-import styled, { css } from "@xstyled/styled-components";
+import styled, { Box, css } from "@xstyled/styled-components";
 
-const Stack = styled.div`
-  ${({ variant, align, justify, gap }) => {
+import ignoreStyledProps from "~/helpers/ignoreStyledProps";
+
+const Stack = styled(ignoreStyledProps(Box, ["variant", "gap"]))`
+  ${({ variant, gap }) => {
     if (variant === "column") {
       return css`
+        display: flex;
         flex-direction: column;
-        justify-content: ${justify};
-        align-items: ${align};
 
         & > * + * {
           margin-top: ${gap};
@@ -14,9 +15,8 @@ const Stack = styled.div`
       `;
     } else {
       return css`
+        display: flex;
         flex-direction: row;
-        justify-content: ${justify};
-        align-items: ${align};
 
         & > * + * {
           margin-left: ${gap};

@@ -5,8 +5,8 @@ import NavigationBar from "./components/NavigationBar";
 export default function Layout({ children }) {
   return (
     <Stack variant="column" gap={2}>
-      <div>Hello</div>
-      <div>World</div>
+      <NavigationBar />
+      {children}
     </Stack>
   );
 }
