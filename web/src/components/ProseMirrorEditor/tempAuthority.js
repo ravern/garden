@@ -20,9 +20,6 @@ class Authority {
     this.onNewSteps.forEach((f) => {
       f();
     });
-
-    console.log(this.steps);
-    console.log(this.stepClientIDs);
   }
 
   addStepsListener(callback) {

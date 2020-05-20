@@ -1,0 +1,30 @@
+{
+  "name": "@ravern/garden-collab",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "nodemon --exec babel-node src/index.js",
+    "start": "babel-node src/index.js",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@babel/node": "^7.8.7",
+    "babel-eslint": "^10.1.0",
+    "dotenv": "^8.2.0",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-simple-import-sort": "^5.0.3",
+    "next": "^9.4.1",
+    "nodemon": "^2.0.4",
+    "prettier": "^2.0.5"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "prosemirror-model": "^1.9.1",
+    "prosemirror-schema-basic": "^1.1.2",
+    "prosemirror-transform": "^1.2.5"
+  }
+}

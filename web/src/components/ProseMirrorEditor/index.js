@@ -1,18 +1,30 @@
+import fetch from "isomorphic-unfetch";
 import { useEffect, useRef } from "react";
 
+import schema from "./schema";
 import { buildView } from "./view";
 
-export default function ProseMirrorEditor({ value, onChange }) {
+export default function ProseMirrorEditor() {
   const editor = useRef();
+  const view = useRef();
 
   useEffect(() => {
-    if (editor.current) {
-      const view = buildView(editor.current, value, onChange);
-      return () => {
-        view.destroy();
-      };
-    }
-  }, [editor]);
+    fetch("http://localhost:3001/")
+      .then((res) => res.json())
+      .then((data) => {
+        if (editor.current) {
+          view.current = buildView(editor.current, {
+            version: data.version,
+            doc: schema.nodeFromJSON(data.doc),
+          });
+        }
+      });
+    return () => {
+      if (view.current) {
+        view.current.destroy();
+      }
+    };
+  }, [editor, view]);
 
   return <article ref={editor} />;
 }

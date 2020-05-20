@@ -1,53 +1,59 @@
+import fetch from "isomorphic-unfetch";
 import {
   getVersion,
   receiveTransaction,
   sendableSteps,
 } from "prosemirror-collab";
+import { Step } from "prosemirror-transform";
 import { EditorView } from "prosemirror-view";
 
+import schema from "../schema";
 import { buildState } from "../state";
-import tempAuthority from "../tempAuthority";
 
-export function buildView(rootElement, value, onChange) {
-  const state = buildState(value);
+export function buildView(rootElement, options) {
+  const state = buildState(options);
 
   const view = new EditorView(rootElement, {
     state,
-    dispatchTransaction: buildDispatchTransaction(() => view, onChange),
+    dispatchTransaction: (transaction) => {
+      const { state } = view.state.applyTransaction(transaction);
+
+      view.updateState(state);
+
+      const sendable = sendableSteps(state);
+      if (sendable) {
+        fetch(`http://localhost:3001/events`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            version: sendable.version,
+            steps: sendable.steps.map((step) => step.toJSON()),
+            clientID: sendable.clientID,
+          }),
+        });
+      }
+    },
   });
 
-  tempAuthority.addStepsListener(() => {
-    let newData = tempAuthority.stepsSince(getVersion(view.state));
-    view.dispatch(
-      receiveTransaction(view.state, newData.steps, newData.clientIDs)
-    );
-  });
+  const interval = setInterval(() => {
+    fetch(`http://localhost:3001/events?version=${getVersion(view.state)}`)
+      .then((res) => res.json())
+      .then(({ steps, stepClientIDs }) => {
+        if (!view.docView) {
+          clearInterval(interval);
+          return;
+        }
+        view.dispatch(
+          receiveTransaction(
+            view.state,
+            steps.map((step) => Step.fromJSON(schema, step)),
+            stepClientIDs
+          )
+        );
+      });
+  }, 500);
 
   return view;
-}
-
-// We intentionally use `getView` here instead of just `view`, since `view`
-// will be `undefined` at first until it is created. #javascriptsemantics
-function buildDispatchTransaction(getView, onChange) {
-  return (transaction) => {
-    const { state, transactions } = getView().state.applyTransaction(
-      transaction
-    );
-
-    getView().updateState(state);
-
-    const sendable = sendableSteps(state);
-    if (sendable) {
-      console.log("sending steps from", sendable.clientID);
-      tempAuthority.receiveSteps(
-        sendable.version,
-        sendable.steps,
-        sendable.clientID
-      );
-    }
-
-    if (transactions.some((tr) => tr.docChanged)) {
-      onChange(state.doc);
-    }
-  };
 }

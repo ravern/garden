@@ -1,11 +1,9 @@
-import { Stack } from "@chakra-ui/core";
-
+import Stack from "~/components/core/Stack";
 import Page from "~/components/Page";
 
 export default function Home() {
   return (
-    <Stack align="center">
-      <Page />
+    <Stack variant="column" alignItems="center">
       <Page />
     </Stack>
   );
