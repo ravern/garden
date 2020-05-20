@@ -11,9 +11,21 @@ export default createGlobalStyle`
     }
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1, h2, h3 {
     margin: 0;
     font-weight: 600;
+  }
+
+  h1 {
+    font-size: 5;
+  }
+
+  h2 {
+    font-size: 4;
+  }
+
+  h3 {
+    font-size: 3;
   }
 
   p {
@@ -25,20 +37,8 @@ export default createGlobalStyle`
   }
 
   article {
-    h1, h2, h3, h4, h5, h6, p {
+    h1, h2, h3, p {
       margin-top: 2;
-    }
-
-    h1 {
-      font-size: 5;
-    }
-
-    h2 {
-      font-size: 4;
-    }
-
-    h2 {
-      font-size: 4;
     }
   }
 `;

@@ -1,4 +1,5 @@
 import "prosemirror-view/style/prosemirror.css";
+import "@reach/dialog/styles.css";
 
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ThemeProvider } from "@xstyled/styled-components";
