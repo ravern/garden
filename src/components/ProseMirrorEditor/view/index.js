@@ -1,6 +1,12 @@
+import {
+  getVersion,
+  receiveTransaction,
+  sendableSteps,
+} from "prosemirror-collab";
 import { EditorView } from "prosemirror-view";
 
 import { buildState } from "../state";
+import tempAuthority from "../tempAuthority";
 
 export function buildView(rootElement, value, onChange) {
   const state = buildState(value);
@@ -8,6 +14,13 @@ export function buildView(rootElement, value, onChange) {
   const view = new EditorView(rootElement, {
     state,
     dispatchTransaction: buildDispatchTransaction(() => view, onChange),
+  });
+
+  tempAuthority.addStepsListener(() => {
+    let newData = tempAuthority.stepsSince(getVersion(view.state));
+    view.dispatch(
+      receiveTransaction(view.state, newData.steps, newData.clientIDs)
+    );
   });
 
   return view;
@@ -22,6 +35,16 @@ function buildDispatchTransaction(getView, onChange) {
     );
 
     getView().updateState(state);
+
+    const sendable = sendableSteps(state);
+    if (sendable) {
+      console.log("sending steps from", sendable.clientID);
+      tempAuthority.receiveSteps(
+        sendable.version,
+        sendable.steps,
+        sendable.clientID
+      );
+    }
 
     if (transactions.some((tr) => tr.docChanged)) {
       onChange(state.doc);

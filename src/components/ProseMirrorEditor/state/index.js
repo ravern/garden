@@ -1,3 +1,4 @@
+import { collab } from "prosemirror-collab";
 import { history } from "prosemirror-history";
 import { EditorState } from "prosemirror-state";
 
@@ -8,6 +9,6 @@ export function buildState(doc) {
   return EditorState.create({
     doc,
     schema,
-    plugins: [history(), keymap],
+    plugins: [history(), keymap, collab()],
   });
 }

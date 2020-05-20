@@ -6,6 +6,7 @@ export default function Home() {
   return (
     <Stack align="center">
       <Page />
+      <Page />
     </Stack>
   );
 }
