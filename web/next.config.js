@@ -6,7 +6,7 @@ dotenv.config();
 
 module.exports = {
   env: {
-    VERCEL_URL: process.env.VERCEL_URL,
+    COLLAB_API_URL: process.env.COLLAB_API_URL,
   },
   webpack: (config) => {
     return merge(config, {

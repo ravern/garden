@@ -1,13 +1,11 @@
-import fetch from "isomorphic-unfetch";
 import {
   getVersion,
   receiveTransaction,
   sendableSteps,
 } from "prosemirror-collab";
-import { Step } from "prosemirror-transform";
 import { EditorView } from "prosemirror-view";
 
-import schema from "../schema";
+import { getEvents, sendEvents } from "../helpers/remote";
 import { buildState } from "../state";
 
 export function buildView(rootElement, options) {
@@ -22,38 +20,19 @@ export function buildView(rootElement, options) {
 
       const sendable = sendableSteps(state);
       if (sendable) {
-        fetch(`http://localhost:3001/events`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            version: sendable.version,
-            steps: sendable.steps.map((step) => step.toJSON()),
-            clientID: sendable.clientID,
-          }),
-        });
+        sendEvents(sendable.version, sendable.clientID, sendable.steps);
       }
     },
   });
 
-  const interval = setInterval(() => {
-    fetch(`http://localhost:3001/events?version=${getVersion(view.state)}`)
-      .then((res) => res.json())
-      .then(({ steps, stepClientIDs }) => {
-        if (!view.docView) {
-          clearInterval(interval);
-          return;
-        }
-        view.dispatch(
-          receiveTransaction(
-            view.state,
-            steps.map((step) => Step.fromJSON(schema, step)),
-            stepClientIDs
-          )
-        );
-      });
-  }, 500);
+  const interval = setInterval(async () => {
+    const { steps, stepClientIDs } = await getEvents(getVersion(view.state));
+    if (!view.docView) {
+      clearInterval(interval);
+      return;
+    }
+    view.dispatch(receiveTransaction(view.state, steps, stepClientIDs));
+  }, 1000);
 
   return view;
 }
