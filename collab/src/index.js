@@ -29,7 +29,18 @@ app.post("/events", (req, res) => {
 });
 
 app.get("/events", (req, res) => {
-  const { steps, stepClientIDs } = instance.stepsSince(req.query.version);
+  const version = parseInt(req.query.version);
+  if (version === instance.version) {
+    instance.onNewSteps.push(() => {
+      const { steps, stepClientIDs } = instance.stepsSince(version);
+      res.status(200).json({
+        steps: steps.map((step) => step.toJSON()),
+        stepClientIDs: stepClientIDs,
+      });
+    });
+    return;
+  }
+  const { steps, stepClientIDs } = instance.stepsSince(version);
   res.status(200).json({
     steps: steps.map((step) => step.toJSON()),
     stepClientIDs: stepClientIDs,

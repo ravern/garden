@@ -28,6 +28,7 @@ class Instance {
     this.doc = doc;
     this.steps = [];
     this.stepClientIDs = [];
+    this.onNewSteps = [];
   }
 
   get version() {
@@ -42,6 +43,11 @@ class Instance {
       this.steps.push(step);
       this.stepClientIDs.push(clientID);
     });
+
+    this.onNewSteps.forEach((callback) => {
+      callback();
+    });
+    this.onNewSteps = [];
   }
 
   stepsSince(version) {

@@ -25,14 +25,17 @@ export function buildView(rootElement, options) {
     },
   });
 
-  const interval = setInterval(async () => {
+  const receiveEvents = async () => {
     const { steps, stepClientIDs } = await getEvents(getVersion(view.state));
-    if (!view.docView) {
-      clearInterval(interval);
-      return;
+    if (view.docView) {
+      view.dispatch(receiveTransaction(view.state, steps, stepClientIDs));
+      setTimeout(() => {
+        receiveEvents();
+      }, 300);
     }
-    view.dispatch(receiveTransaction(view.state, steps, stepClientIDs));
-  }, 1000);
+  };
+
+  receiveEvents();
 
   return view;
 }
