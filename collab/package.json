@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec babel-node src/index.js",
+    "prod": "node dist/index.js",
     "start": "babel-node src/index.js",
+    "build": "babel --out-dir dist/ src/",
     "lint": "eslint ."
   },
   "devDependencies": {
+    "@babel/cli": "^7.8.4",
     "@babel/node": "^7.8.7",
     "babel-eslint": "^10.1.0",
     "dotenv": "^8.2.0",
@@ -20,6 +23,7 @@
     "prettier": "^2.0.5"
   },
   "dependencies": {
+    "@babel/runtime": "^7.9.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
