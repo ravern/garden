@@ -15,15 +15,16 @@ export function buildView(rootElement, options) {
     state,
     dispatchTransaction: (transaction) => {
       const { state } = view.state.applyTransaction(transaction);
-
       view.updateState(state);
-
-      const sendable = sendableSteps(state);
-      if (sendable) {
-        sendEvents(sendable.version, sendable.clientID, sendable.steps);
-      }
     },
   });
+
+  setInterval(() => {
+    const sendable = sendableSteps(view.state);
+    if (sendable) {
+      sendEvents(sendable.version, sendable.clientID, sendable.steps);
+    }
+  }, 500);
 
   const receiveEvents = async () => {
     const { steps, stepClientIDs } = await getEvents(getVersion(view.state));
@@ -31,7 +32,7 @@ export function buildView(rootElement, options) {
       view.dispatch(receiveTransaction(view.state, steps, stepClientIDs));
       setTimeout(() => {
         receiveEvents();
-      }, 300);
+      }, 500);
     }
   };
 
