@@ -6,8 +6,6 @@ import { PageQuery } from "./queries";
 
 const token = Buffer.from(`collab:${process.env.API_KEY}`).toString("base64");
 
-console.log(process.env.API_URL);
-
 const client = new ApolloClient({
   uri: `${process.env.API_URL}/api`,
   fetch,
@@ -24,11 +22,11 @@ client.defaultOptions = {
   },
 };
 
-export async function pageUpdate(pageID, content) {
+export async function pageUpdate(pageID, version, content) {
   return client.mutate({
     mutation: PageUpdateMutation,
     variables: {
-      input: { pageID, content },
+      input: { pageID, version, content },
     },
   });
 }

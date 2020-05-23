@@ -69,6 +69,7 @@ const typeDefs = gql`
 
   input PageUpdateInput {
     pageID: ID!
+    version: Int!
     content: JSON!
   }
 

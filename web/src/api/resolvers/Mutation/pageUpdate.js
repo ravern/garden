@@ -5,12 +5,16 @@ function getTitleFromContent(content) {
   return content.content[0].content.map(({ text }) => text).join("");
 }
 
-export default async function pageUpdate(_obj, { input }, { db, currentUser }) {
-  if (!currentUser) {
+export default async function pageUpdate(
+  _obj,
+  { input },
+  { db, currentUser, currentCollabServer }
+) {
+  if (!currentCollabServer && !currentUser) {
     throw new AuthenticationError("You need to be logged in");
   }
 
-  const { pageID, content } = input;
+  const { pageID, content, version } = input;
 
   // Verify that contents is in the correct format.
   try {
@@ -29,6 +33,7 @@ export default async function pageUpdate(_obj, { input }, { db, currentUser }) {
     .where({ id: pageID })
     .update({
       title,
+      version,
       content,
     })
     .returning("*");

@@ -36,6 +36,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "prosemirror-model": "^1.9.1",
     "prosemirror-schema-basic": "^1.1.2",
-    "prosemirror-transform": "^1.2.5"
+    "prosemirror-transform": "^1.2.5",
+    "uuid": "^8.1.0"
   }
 }

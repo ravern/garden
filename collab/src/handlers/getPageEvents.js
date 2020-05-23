@@ -1,3 +1,5 @@
+import { v4 as uuid } from "uuid";
+
 import store from "../store";
 
 function sendResponse(res, events) {
@@ -35,9 +37,14 @@ export default async function getPageEvents(req, res) {
   // If there are no steps to return, we add a listener to wait for new steps
   // before sending the response. Otherwise, send the response immediately.
   if (events.steps.length === 0) {
-    instance.addEventsListener(() => {
+    const id = instance.addEventsListener(() => {
       const events = instance.getEvents(version);
       sendResponse(res, events);
+    });
+    req.connection.on("close", () => {
+      console.log("connection closed!");
+      instance.removeEventsListener(id);
+      console.log(instance.eventsListeners);
     });
   } else {
     sendResponse(res, events);

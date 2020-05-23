@@ -17,7 +17,7 @@ export default function ProseMirrorEditor() {
         if (editor.current) {
           view.current = buildView(editor.current, {
             version: data.version,
-            doc: schema.nodeFromJSON(data.content),
+            doc: schema.nodeFromJSON(data.doc),
           });
         }
       });
