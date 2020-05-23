@@ -44,6 +44,7 @@ class Store {
 
     // If the instance is stale, remove it.
     if (new Date().getTime() - instance.lastUpdated > INSTANCE_STALE_TIME) {
+      clearInterval(instanceInfo.interval);
       delete this.instances[pageID];
       delete this.instanceInfos[pageID];
     }

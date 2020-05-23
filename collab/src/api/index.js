@@ -1,8 +1,7 @@
 import ApolloClient from "apollo-boost";
 import fetch from "isomorphic-unfetch";
 
-import { PageUpdateMutation } from "./mutations";
-import { PageQuery } from "./queries";
+import { PageQuery, PageUpdateMutation } from "./graphql";
 
 const token = Buffer.from(`collab:${process.env.API_KEY}`).toString("base64");
 
