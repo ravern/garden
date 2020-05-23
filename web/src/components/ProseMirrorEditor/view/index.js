@@ -19,20 +19,28 @@ export function buildView(rootElement, options) {
     },
   });
 
-  setInterval(() => {
+  setInterval(async () => {
     const sendable = sendableSteps(view.state);
     if (sendable) {
-      sendEvents(sendable.version, sendable.clientID, sendable.steps);
+      try {
+        await sendEvents(sendable.version, sendable.clientID, sendable.steps);
+      } catch (error) {
+        console.warn(error);
+      }
     }
   }, 500);
 
   const receiveEvents = async () => {
-    const { steps, stepClientIDs } = await getEvents(getVersion(view.state));
-    if (view.docView) {
-      view.dispatch(receiveTransaction(view.state, steps, stepClientIDs));
-      setTimeout(() => {
-        receiveEvents();
-      }, 500);
+    try {
+      const { steps, stepClientIDs } = await getEvents(getVersion(view.state));
+      if (view.docView) {
+        view.dispatch(receiveTransaction(view.state, steps, stepClientIDs));
+        setTimeout(() => {
+          receiveEvents();
+        }, 500);
+      }
+    } catch (error) {
+      console.warn(error);
     }
   };
 
