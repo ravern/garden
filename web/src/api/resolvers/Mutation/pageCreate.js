@@ -8,8 +8,12 @@ function buildInitialContent(title) {
   ]);
 }
 
-export default async function pageCreate(_obj, { input }, { db, currentUser }) {
-  if (!currentUser) {
+export default async function pageCreate(
+  _obj,
+  { input },
+  { db, currentUser, currentCollabServer }
+) {
+  if (!currentCollabServer && !currentUser) {
     throw new AuthenticationError("You need to be logged in");
   }
 

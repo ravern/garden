@@ -3,6 +3,7 @@ import connect from "connect";
 import cors from "cors";
 
 import db from "~/api/db";
+import getCollabServer from "~/api/helpers/getCollabServer";
 import getUser from "~/api/helpers/getUser";
 import resolvers from "~/api/resolvers";
 import typeDefs from "~/api/typeDefs";
@@ -12,7 +13,8 @@ const server = new ApolloServer({
   resolvers,
   context: async (ctx) => {
     const currentUser = await getUser(ctx);
-    return { db, currentUser };
+    const currentCollabServer = await getCollabServer(ctx);
+    return { db, currentUser, currentCollabServer };
   },
 });
 
