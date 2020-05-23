@@ -1,0 +1,17 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "run-p dev:*",
+    "dev:web": "cd web && yarn dev",
+    "dev:models": "cd models && yarn dev",
+    "dev:collab": "cd collab && yarn dev"
+  },
+  "workspaces": [
+    "models",
+    "collab",
+    "web"
+  ],
+  "devDependencies": {
+    "yarn-run-all": "^3.1.1"
+  }
+}
