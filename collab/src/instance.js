@@ -37,7 +37,8 @@ class Instance {
 
 export default new Instance(
   schema.node("doc", null, [
-    schema.node("heading", null, [schema.text("One.")]),
-    schema.node("paragraph", null, [schema.text("Two!")]),
+    schema.node("title", null, [schema.text("Title")]),
+    schema.node("heading", null, [schema.text("Heading")]),
+    schema.node("paragraph", null, [schema.text("Paragraph")]),
   ])
 );

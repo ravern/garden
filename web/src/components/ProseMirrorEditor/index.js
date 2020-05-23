@@ -1,7 +1,7 @@
+import { schema } from "@ravern/garden-models";
 import fetch from "isomorphic-unfetch";
 import { useEffect, useRef } from "react";
 
-import schema from "./schema";
 import { buildView } from "./view";
 
 export default function ProseMirrorEditor() {

@@ -1,9 +1,10 @@
+import { schema } from "@ravern/garden-models";
 import bodyParser from "body-parser";
 import cors from "cors";
 import express from "express";
 import { Step } from "prosemirror-transform";
 
-import instance, { schema } from "./instance";
+import instance from "./instance";
 
 const app = express();
 

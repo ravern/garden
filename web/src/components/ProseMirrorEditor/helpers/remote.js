@@ -1,7 +1,6 @@
+import { schema } from "@ravern/garden-models";
 import fetch from "isomorphic-unfetch";
 import { Step } from "prosemirror-transform";
-
-import schema from "../schema";
 
 function getURL(path) {
   return `${process.env.COLLAB_API_URL}${path}`;

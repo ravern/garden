@@ -1,8 +1,7 @@
+import { schema } from "@ravern/garden-models";
 import { baseKeymap, toggleMark } from "prosemirror-commands";
 import { redo, undo } from "prosemirror-history";
 import { keymap } from "prosemirror-keymap";
-
-import schema from "../schema";
 
 export default keymap({
   ...baseKeymap,

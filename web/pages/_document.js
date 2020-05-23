@@ -1,6 +1,7 @@
 import NextDocument from "next/document";
 import React from "react";
 import { ServerStyleSheet } from "styled-components";
+
 export default class Document extends NextDocument {
   static async getInitialProps(ctx) {
     const sheet = new ServerStyleSheet();
