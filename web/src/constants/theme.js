@@ -6,6 +6,9 @@ export default {
     body: "Inter, sans-serif",
     mono: "monospace",
   },
+  colors: {
+    failure: "red",
+  },
   transformers: {
     ...rpxTransformers,
   },

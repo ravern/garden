@@ -1,12 +1,19 @@
+import { useQuery } from "@apollo/react-hooks";
 import NextLink from "next/link";
 import { useState } from "react";
 
 import Stack from "~/components/core/Stack";
+import CurrentUserQuery from "~/graphql/CurrentUserQuery";
 
+import SignInDialog from "./components/SignInDialog";
 import SignUpDialog from "./components/SignUpDialog";
 
 export default function NavigationBar() {
+  const { data } = useQuery(CurrentUserQuery);
+  const currentUser = data?.currentUser;
+
   const [isSignUpDialogOpen, setIsSignUpDialogOpen] = useState(false);
+  const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false);
 
   return (
     <>
@@ -23,11 +30,24 @@ export default function NavigationBar() {
           <NextLink href="/">
             <a>Settings</a>
           </NextLink>
-          <button onClick={() => setIsSignUpDialogOpen(true)}>Sign up</button>
+          {currentUser && currentUser.username}
+          {!currentUser && (
+            <>
+              <button onClick={() => setIsSignInDialogOpen(true)}>
+                Sign in
+              </button>
+              <button onClick={() => setIsSignUpDialogOpen(true)}>
+                Sign up
+              </button>
+            </>
+          )}
         </Stack>
       </Stack>
       {isSignUpDialogOpen && (
         <SignUpDialog onDismiss={() => setIsSignUpDialogOpen(false)} />
+      )}
+      {isSignInDialogOpen && (
+        <SignInDialog onDismiss={() => setIsSignInDialogOpen(false)} />
       )}
     </>
   );

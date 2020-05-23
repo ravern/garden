@@ -1,30 +1,35 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import { Box } from "@xstyled/styled-components";
 import { useForm } from "react-hook-form";
 
 import Stack from "~/components/core/Stack";
-import RegisterMutation from "~/graphql/RegisterMutation";
+import LoginMutation from "~/graphql/LoginMutation";
+import saveTokenAndRefetchCurrentUser from "~/helpers/saveTokenAndRefetchCurrentUser";
 import transformFormError from "~/helpers/transformFormError";
 
-export default function SignUpForm() {
-  const [signUp] = useMutation(RegisterMutation);
+export default function SignInForm({ onSuccess }) {
+  const apolloClient = useApolloClient();
+
+  const [signIn] = useMutation(LoginMutation);
 
   const { register, handleSubmit: onSubmit, errors, setError } = useForm();
 
   const handleSubmit = async (values) => {
     const input = {
-      username: values.username,
-      email: values.email,
+      emailOrUsername: values.emailOrUsername,
       password: values.password,
     };
     const {
       data: {
-        register: { error },
+        login: { data, error },
       },
-    } = await signUp({ variables: { input } });
+    } = await signIn({ variables: { input } });
     if (error) {
       setError(transformFormError(error));
+      return;
     }
+    saveTokenAndRefetchCurrentUser(apolloClient, data.token);
+    onSuccess();
   };
 
   return (
@@ -38,23 +43,20 @@ export default function SignUpForm() {
       onSubmit={onSubmit(handleSubmit)}
     >
       <h1>publish.garden</h1>
-      {errors.message && <Box color="failure">{errors.message}</Box>}
-      <input name="username" placeholder="Username" ref={register} />
-      <input name="email" placeholder="Email" ref={register} />
+      {errors.message && <Box color="failure">{errors.message.message}</Box>}
+      <input
+        name="emailOrUsername"
+        placeholder="Email or username"
+        ref={register}
+      />
       <input
         name="password"
         type="password"
         placeholder="Password"
         ref={register}
       />
-      <input
-        name="confirmPassword"
-        type="password"
-        placeholder="Confirm Password"
-        ref={register}
-      />
       <Stack variant="row" gap={2}>
-        <button type="submit">Sign up</button>
+        <button type="submit">Sign in</button>
       </Stack>
     </Stack>
   );
