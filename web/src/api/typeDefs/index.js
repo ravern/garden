@@ -1,6 +1,8 @@
 import gql from "graphql-tag";
 
 const typeDefs = gql`
+  scalar JSON
+
   type Query {
     currentUser: User!
   }
@@ -8,6 +10,8 @@ const typeDefs = gql`
   type Mutation {
     login(input: LoginInput!): LoginResult!
     register(input: RegisterInput!): RegisterResult!
+    pageCreate(input: PageCreateInput!): PageCreateResult!
+    pageUpdate(input: PageUpdateInput!): PageUpdateResult!
   }
 
   type Error {
@@ -46,9 +50,30 @@ const typeDefs = gql`
   }
 
   type RegisterError {
+    message: String!
     email: String
     username: String
     password: String
+  }
+
+  input PageCreateInput {
+    gardenID: ID!
+    title: String!
+  }
+
+  type PageCreateResult {
+    data: Page
+    error: Error
+  }
+
+  input PageUpdateInput {
+    pageID: ID!
+    content: JSON!
+  }
+
+  type PageUpdateResult {
+    data: Page
+    error: Error
   }
 
   type User {
@@ -74,6 +99,7 @@ const typeDefs = gql`
   type Page {
     id: ID!
     title: String!
+    content: JSON!
     garden: Garden!
   }
 `;

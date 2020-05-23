@@ -23,12 +23,14 @@ export default async function register(_obj, { input }, { db }) {
       if (error.constraint.endsWith("email_unique")) {
         return {
           error: {
+            message: "Failed to register",
             email: "Email already exists",
           },
         };
       } else if (error.constraint.endsWith("username_unique")) {
         return {
           error: {
+            message: "Failed to register",
             username: "Username already exists",
           },
         };

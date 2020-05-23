@@ -1,3 +1,5 @@
+import JSON from "graphql-type-json";
+
 import Garden from "./Garden";
 import Mutation from "./Mutation";
 import Query from "./Query";
@@ -10,6 +12,7 @@ const resolvers = {
   User,
   Garden,
   UserGarden,
+  JSON,
 };
 
 export default resolvers;
