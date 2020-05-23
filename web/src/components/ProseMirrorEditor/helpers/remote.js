@@ -12,18 +12,25 @@ export async function sendEvents(version, clientID, steps) {
     clientID: clientID,
     steps: steps.map((step) => step.toJSON()),
   };
-  const res = await fetch(getURL("/events"), {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(body),
-  });
+  const res = await fetch(
+    getURL("/pages/bdaa940f-0ac7-45c7-acb7-d40e580bde21/events"),
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    }
+  );
   return res.json();
 }
 
 export async function getEvents(version) {
-  const res = await fetch(getURL(`/events?version=${version}`));
+  const res = await fetch(
+    getURL(
+      `/pages/bdaa940f-0ac7-45c7-acb7-d40e580bde21/events?version=${version}`
+    )
+  );
   const { steps, stepClientIDs } = await res.json();
 
   return {

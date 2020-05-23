@@ -25,6 +25,7 @@ export default async function pageCreate(
     .insert({
       garden_id: gardenID,
       title,
+      version: 0,
       content: content.toJSON(),
     })
     .returning("*");

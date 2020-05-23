@@ -1,7 +1,8 @@
 import ApolloClient from "apollo-boost";
 import fetch from "isomorphic-unfetch";
 
-import { PageCreateMutation } from "./mutations";
+import { PageUpdateMutation } from "./mutations";
+import { PageQuery } from "./queries";
 
 const token = Buffer.from(`collab:${process.env.API_KEY}`).toString("base64");
 
@@ -23,13 +24,19 @@ client.defaultOptions = {
   },
 };
 
-export async function pageCreate(gardenID, title) {
+export async function pageUpdate(pageID, content) {
   return client.mutate({
-    mutation: PageCreateMutation,
+    mutation: PageUpdateMutation,
     variables: {
-      input: { gardenID, title },
+      input: { pageID, content },
     },
   });
 }
 
-export async function pageUpdate(pageID, content) {}
+export async function page(id) {
+  const { data } = await client.query({
+    query: PageQuery,
+    variables: { id },
+  });
+  return data?.page;
+}

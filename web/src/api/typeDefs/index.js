@@ -5,6 +5,7 @@ const typeDefs = gql`
 
   type Query {
     currentUser: User!
+    page(id: ID!): Page
   }
 
   type Mutation {
@@ -99,6 +100,7 @@ const typeDefs = gql`
   type Page {
     id: ID!
     title: String!
+    version: Int!
     content: JSON!
     garden: Garden!
   }

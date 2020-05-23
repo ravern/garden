@@ -7,7 +7,9 @@ import cors from "cors";
 import express from "express";
 import { Step } from "prosemirror-transform";
 
-import { pageCreate } from "./api";
+import getPage from "./handlers/getPage";
+import getPageEvents from "./handlers/getPageEvents";
+import postPageEvents from "./handlers/postPageEvents";
 import instance from "./instance";
 
 const app = express();
@@ -15,21 +17,9 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
-app.get(
-  "/test",
-  wrap(async (req, res) => {
-    try {
-      const data = await pageCreate(
-        "2783fd68-7e23-45d0-bc9e-398db0474a02",
-        "Testing 1 2 3"
-      );
-      res.json(data);
-    } catch (error) {
-      console.log(JSON.stringify(error, null, 4));
-      res.json({ ok: false });
-    }
-  })
-);
+app.get("/pages/:pageID", wrap(getPage));
+app.get("/pages/:pageID/events", wrap(getPageEvents));
+app.post("/pages/:pageID/events", wrap(postPageEvents));
 
 app.get("/", (req, res) => {
   res.status(200).json({

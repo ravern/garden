@@ -1,8 +1,8 @@
 import gql from "graphql-tag";
 
-export const PageCreateMutation = gql`
-  mutation PageCreateMutation($input: PageCreateInput!) {
-    pageCreate(input: $input) {
+export const PageUpdateMutation = gql`
+  mutation PageUpdateMutation($input: PageUpdateInput!) {
+    pageUpdate(input: $input) {
       data {
         id
         title
@@ -14,5 +14,3 @@ export const PageCreateMutation = gql`
     }
   }
 `;
-
-// export const PageUpdateMutation = gql``;
