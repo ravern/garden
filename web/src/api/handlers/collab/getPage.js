@@ -2,8 +2,8 @@ import { schema } from "@ravern/garden-models";
 
 import store from "~/api/store";
 
-async function queryPage() {
-  return null;
+async function queryPage(db, pageID) {
+  return db.select("*").from("pages").where({ id: pageID }).first();
 }
 
 export default async function getPage(req, res) {
@@ -18,7 +18,7 @@ export default async function getPage(req, res) {
     return;
   }
 
-  const page = await queryPage(pageID);
+  const page = await queryPage(req.app.locals.db, pageID);
   if (!page) {
     res.status(404).json({ message: "Could not find page." });
     return;

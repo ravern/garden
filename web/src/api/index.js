@@ -4,6 +4,7 @@ import { wrap } from "async-middleware";
 import bodyParser from "body-parser";
 import express from "express";
 
+import db from "~/api/db";
 import getPage from "~/api/handlers/collab/getPage";
 import getPageEvents from "~/api/handlers/collab/getPageEvents";
 import postPageEvents from "~/api/handlers/collab/postPageEvents";
@@ -15,6 +16,8 @@ async function main() {
   await prepareWeb();
 
   const app = express();
+
+  app.locals.db = db;
 
   app.use(bodyParser.json());
 

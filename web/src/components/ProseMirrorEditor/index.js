@@ -9,9 +9,7 @@ export default function ProseMirrorEditor() {
   const view = useRef();
 
   useEffect(() => {
-    fetch(
-      `${process.env.COLLAB_API_URL}/pages/bdaa940f-0ac7-45c7-acb7-d40e580bde21`
-    )
+    fetch("/api/collab/bdaa940f-0ac7-45c7-acb7-d40e580bde21")
       .then((res) => res.json())
       .then((data) => {
         if (editor.current) {

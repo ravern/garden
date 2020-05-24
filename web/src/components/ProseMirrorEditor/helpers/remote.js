@@ -2,10 +2,6 @@ import { schema } from "@ravern/garden-models";
 import fetch from "isomorphic-unfetch";
 import { Step } from "prosemirror-transform";
 
-function getURL(path) {
-  return `${process.env.COLLAB_API_URL}${path}`;
-}
-
 export async function sendEvents(version, clientID, steps) {
   const body = {
     version: version,
@@ -13,7 +9,7 @@ export async function sendEvents(version, clientID, steps) {
     steps: steps.map((step) => step.toJSON()),
   };
   const res = await fetch(
-    getURL("/pages/bdaa940f-0ac7-45c7-acb7-d40e580bde21/events"),
+    "/api/collab/bdaa940f-0ac7-45c7-acb7-d40e580bde21/events",
     {
       method: "POST",
       headers: {
@@ -27,9 +23,7 @@ export async function sendEvents(version, clientID, steps) {
 
 export async function getEvents(version) {
   const res = await fetch(
-    getURL(
-      `/pages/bdaa940f-0ac7-45c7-acb7-d40e580bde21/events?version=${version}`
-    )
+    `/api/collab/bdaa940f-0ac7-45c7-acb7-d40e580bde21/events?version=${version}`
   );
   const { steps, stepClientIDs } = await res.json();
 

@@ -1,6 +1,19 @@
+import db from "~/api/db";
+
 import Instance from "./models/instance";
 
-async function pageUpdate() {}
+function getTitleFromContent(content) {
+  return content.content[0].content.map(({ text }) => text).join("");
+}
+
+async function pageUpdate(pageID, version, content) {
+  const title = getTitleFromContent(content);
+  await db("pages").where({ id: pageID }).update({
+    title,
+    version,
+    content,
+  });
+}
 
 const INSTANCE_TICK_INTERVAL = 5 * 1000;
 const INSTANCE_STALE_TIME = 5 * 60 * 1000;
