@@ -1,7 +1,7 @@
 FROM node:current-alpine
 
 ENV NODE_ENV=production
-ENV PORT=80
+ENV PORT=8080
 
 WORKDIR /app
 
@@ -14,6 +14,6 @@ COPY . .
 
 RUN yarn build
 
-EXPOSE 80
+EXPOSE $PORT
 
 CMD [ "yarn", "prod" ]
