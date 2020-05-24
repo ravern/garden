@@ -10,10 +10,10 @@ import { HttpLink } from "apollo-link-http";
 import fetch from "isomorphic-unfetch";
 import Head from "next/head";
 
-import Layout from "~/components/Layout";
-import Styles from "~/components/Styles";
-import { LOCAL_STORAGE_KEY_TOKEN } from "~/constants";
-import theme from "~/constants/theme";
+import Layout from "~/web/components/Layout";
+import Styles from "~/web/components/Styles";
+import { LOCAL_STORAGE_KEY_TOKEN } from "~/web/constants";
+import theme from "~/web/constants/theme";
 
 const cache = new InMemoryCache();
 

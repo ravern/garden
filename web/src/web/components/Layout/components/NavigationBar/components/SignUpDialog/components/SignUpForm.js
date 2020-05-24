@@ -2,9 +2,9 @@ import { useMutation } from "@apollo/react-hooks";
 import { Box } from "@xstyled/styled-components";
 import { useForm } from "react-hook-form";
 
-import Stack from "~/components/core/Stack";
-import RegisterMutation from "~/graphql/RegisterMutation";
-import transformFormError from "~/helpers/transformFormError";
+import Stack from "~/web/components/core/Stack";
+import RegisterMutation from "~/web/graphql/RegisterMutation";
+import transformFormError from "~/web/helpers/transformFormError";
 
 export default function SignUpForm() {
   const [signUp] = useMutation(RegisterMutation);

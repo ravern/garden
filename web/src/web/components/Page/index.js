@@ -1,6 +1,6 @@
 import styled from "@xstyled/styled-components";
 
-import Stack from "~/components/core/Stack";
+import Stack from "~/web/components/core/Stack";
 
 import Editor from "./components/Editor";
 

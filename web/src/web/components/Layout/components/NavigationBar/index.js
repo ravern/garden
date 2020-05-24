@@ -2,8 +2,8 @@ import { useQuery } from "@apollo/react-hooks";
 import NextLink from "next/link";
 import { useState } from "react";
 
-import Stack from "~/components/core/Stack";
-import CurrentUserQuery from "~/graphql/CurrentUserQuery";
+import Stack from "~/web/components/core/Stack";
+import CurrentUserQuery from "~/web/graphql/CurrentUserQuery";
 
 import SignInDialog from "./components/SignInDialog";
 import SignUpDialog from "./components/SignUpDialog";

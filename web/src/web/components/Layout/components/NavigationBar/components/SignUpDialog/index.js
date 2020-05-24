@@ -1,4 +1,4 @@
-import Dialog from "~/components/core/Dialog";
+import Dialog from "~/web/components/core/Dialog";
 
 import SignUpForm from "./components/SignUpForm";
 

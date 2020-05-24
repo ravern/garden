@@ -1,5 +1,5 @@
-import Stack from "~/components/core/Stack";
-import Page from "~/components/Page";
+import Stack from "~/web/components/core/Stack";
+import Page from "~/web/components/Page";
 
 export default function Home() {
   return (

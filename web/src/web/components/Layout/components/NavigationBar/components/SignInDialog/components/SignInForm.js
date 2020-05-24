@@ -2,10 +2,10 @@ import { useApolloClient, useMutation } from "@apollo/react-hooks";
 import { Box } from "@xstyled/styled-components";
 import { useForm } from "react-hook-form";
 
-import Stack from "~/components/core/Stack";
-import LoginMutation from "~/graphql/LoginMutation";
-import saveTokenAndRefetchCurrentUser from "~/helpers/saveTokenAndRefetchCurrentUser";
-import transformFormError from "~/helpers/transformFormError";
+import Stack from "~/web/components/core/Stack";
+import LoginMutation from "~/web/graphql/LoginMutation";
+import saveTokenAndRefetchCurrentUser from "~/web/helpers/saveTokenAndRefetchCurrentUser";
+import transformFormError from "~/web/helpers/transformFormError";
 
 export default function SignInForm({ onSuccess }) {
   const apolloClient = useApolloClient();
