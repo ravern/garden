@@ -1,4 +1,4 @@
-import { schema } from "@ravern/garden-models";
+import schema from "~/models/schema";
 import { Step } from "prosemirror-transform";
 
 import store from "~/api/store";

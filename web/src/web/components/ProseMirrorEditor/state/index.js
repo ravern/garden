@@ -1,4 +1,4 @@
-import { schema } from "@ravern/garden-models";
+import schema from "~/models/schema";
 import { collab } from "prosemirror-collab";
 import { history } from "prosemirror-history";
 import { EditorState } from "prosemirror-state";

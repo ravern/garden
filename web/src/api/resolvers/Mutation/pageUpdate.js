@@ -1,16 +1,12 @@
-import { schema } from "@ravern/garden-models";
+import schema from "~/models/schema";
 import { AuthenticationError } from "apollo-server-micro";
 
 function getTitleFromContent(content) {
   return content.content[0].content.map(({ text }) => text).join("");
 }
 
-export default async function pageUpdate(
-  _obj,
-  { input },
-  { db, currentUser, currentCollabServer }
-) {
-  if (!currentCollabServer && !currentUser) {
+export default async function pageUpdate(_obj, { input }, { db, currentUser }) {
+  if (!currentUser) {
     throw new AuthenticationError("You need to be logged in");
   }
 

@@ -1,4 +1,4 @@
-import { schema } from "@ravern/garden-models";
+import schema from "~/models/schema";
 import { baseKeymap, toggleMark } from "prosemirror-commands";
 import { redo, undo } from "prosemirror-history";
 import { keymap } from "prosemirror-keymap";

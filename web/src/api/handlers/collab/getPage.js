@@ -1,4 +1,4 @@
-import { schema } from "@ravern/garden-models";
+import schema from "~/models/schema";
 
 import store from "~/api/store";
 

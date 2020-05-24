@@ -1,4 +1,4 @@
-import { schema } from "@ravern/garden-models";
+import schema from "~/models/schema";
 import fetch from "isomorphic-unfetch";
 import { Step } from "prosemirror-transform";
 

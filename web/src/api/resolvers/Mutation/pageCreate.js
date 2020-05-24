@@ -1,4 +1,4 @@
-import { schema } from "@ravern/garden-models";
+import schema from "~/models/schema";
 import { AuthenticationError } from "apollo-server-micro";
 
 function buildInitialContent(title) {

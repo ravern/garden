@@ -1,11 +1,7 @@
 import { AuthenticationError } from "apollo-server-micro";
 
-export default async function page(
-  _obj,
-  { id },
-  { db, currentUser, currentCollabServer }
-) {
-  if (!currentUser && !currentCollabServer) {
+export default async function page(_obj, { id }, { db, currentUser }) {
+  if (!currentUser) {
     throw new AuthenticationError("You need to be logged in");
   }
 
