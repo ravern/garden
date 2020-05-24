@@ -1,25 +1,14 @@
 import "dotenv/config";
 
-import { ApolloServer } from "apollo-server-micro";
+import { wrap } from "async-middleware";
+import bodyParser from "body-parser";
 import express from "express";
 
-import db from "~/api/db";
+import getPage from "~/api/handlers/collab/getPage";
+import getPageEvents from "~/api/handlers/collab/getPageEvents";
+import postPageEvents from "~/api/handlers/collab/postPageEvents";
+import graphql from "~/api/handlers/graphql";
 import web, { prepareWeb } from "~/api/handlers/web";
-import getCollabServer from "~/api/helpers/getCollabServer";
-import getUser from "~/api/helpers/getUser";
-import resolvers from "~/api/resolvers";
-import typeDefs from "~/api/typeDefs";
-
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: async (ctx) => {
-    const currentUser = await getUser(ctx);
-    const currentCollabServer = await getCollabServer(ctx);
-    return { db, currentUser, currentCollabServer };
-  },
-});
-const serverHandler = server.createHandler({ path: "/api" });
 
 async function main() {
   // NextJS needs to do its compilation steps etc.
@@ -27,8 +16,16 @@ async function main() {
 
   const app = express();
 
-  app.get("/api", serverHandler);
-  app.post("/api", serverHandler);
+  app.use(bodyParser.json());
+
+  // Load up the main GraphQL API.
+  app.get("/api/graphql", graphql);
+  app.post("/api/graphql", graphql);
+
+  // Load up the routes for collaborative editing.
+  app.get("/api/collab/:pageID", wrap(getPage));
+  app.get("/api/collab/:pageID/events", wrap(getPageEvents));
+  app.post("/api/collab/:pageID/events", wrap(postPageEvents));
 
   // Serve the frontend if nothing else matches.
   app.use(web);

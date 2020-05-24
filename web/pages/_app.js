@@ -18,7 +18,7 @@ import theme from "~/constants/theme";
 const cache = new InMemoryCache();
 
 const httpLink = new HttpLink({
-  uri: "/api",
+  uri: "/api/graphql",
   fetch,
 });
 
