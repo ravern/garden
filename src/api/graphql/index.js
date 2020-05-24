@@ -1,8 +1,8 @@
 import { ApolloServer } from "apollo-server-express";
 
-import getUser from "~/api/helpers/getUser";
-import resolvers from "~/api/resolvers";
-import typeDefs from "~/api/typeDefs";
+import getUser from "./helpers/getUser";
+import resolvers from "./resolvers";
+import typeDefs from "./typeDefs";
 
 const server = new ApolloServer({
   typeDefs,

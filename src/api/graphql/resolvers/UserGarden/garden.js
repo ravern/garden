@@ -1,4 +1,4 @@
-import gardensByUserGardenIDsLoader from "~/api/loaders/gardensByUserGardenIDs";
+import gardensByUserGardenIDsLoader from "~/api/graphql/loaders/gardensByUserGardenIDs";
 
 export default async function garden(userGarden) {
   return gardensByUserGardenIDsLoader.load(userGarden.id);
