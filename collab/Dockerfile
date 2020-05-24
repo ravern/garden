@@ -8,6 +8,7 @@ RUN echo 'crond' > /boot.sh
 
 COPY package.json ./
 COPY yarn.lock ./
+COPY .npmrc ./
 
 RUN yarn install --production
 
