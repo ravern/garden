@@ -5,10 +5,10 @@ import bodyParser from "body-parser";
 import express from "express";
 
 import db from "~/api/db";
+import server from "~/api/graphql";
 import getPage from "~/api/handlers/collab/getPage";
 import getPageEvents from "~/api/handlers/collab/getPageEvents";
 import postPageEvents from "~/api/handlers/collab/postPageEvents";
-import graphql from "~/api/handlers/graphql";
 import web, { prepareWeb } from "~/api/handlers/web";
 
 async function main() {
@@ -22,8 +22,7 @@ async function main() {
   app.use(bodyParser.json());
 
   // Load up the main GraphQL API.
-  app.get("/api/graphql", graphql);
-  app.post("/api/graphql", graphql);
+  server.applyMiddleware({ app, path: "/api/graphql" });
 
   // Load up the routes for collaborative editing.
   app.get("/api/collab/:pageID", wrap(getPage));
@@ -35,7 +34,7 @@ async function main() {
 
   const port = process.env.PORT;
   app.listen(port, () => {
-    console.log(`listening on port ${port}...`);
+    console.log(`server listening on port ${port}...`);
   });
 }
 

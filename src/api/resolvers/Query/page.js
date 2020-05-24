@@ -1,4 +1,4 @@
-import { AuthenticationError } from "apollo-server-micro";
+import { AuthenticationError } from "apollo-server-express";
 
 export default async function page(_obj, { id }, { db, currentUser }) {
   if (!currentUser) {
