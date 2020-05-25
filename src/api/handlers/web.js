@@ -3,6 +3,7 @@ import { parse as parseURL } from "url";
 
 const app = next({
   dev: process.env.NODE_ENV !== "production",
+  dir: "src/web",
   conf: {
     env: {
       COLLAB_API_URL: process.env.COLLAB_API_URL,
