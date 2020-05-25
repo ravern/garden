@@ -1,5 +1,6 @@
-import schema from "~/models/schema";
 import { AuthenticationError } from "apollo-server-express";
+
+import schema from "~/models/schema";
 
 function buildInitialContent(title) {
   return schema.node("doc", null, [

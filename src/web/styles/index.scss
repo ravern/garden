@@ -76,6 +76,10 @@ a {
   color: #3585d4;
 }
 
+strong {
+  font-weight: $font-bold;
+}
+
 button {
   cursor: pointer;
   background: none;
@@ -99,6 +103,7 @@ nav {
 
 article, .ProseMirror {
   line-height: 1.5;
+  word-wrap: break-word;
 
   & > *:first-child {
     margin-top: 0;

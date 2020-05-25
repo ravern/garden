@@ -1,16 +1,11 @@
-import styled from "@xstyled/styled-components";
+import Node from "./components/Node";
 
-import Editor from "./components/Editor";
+export default function Page({ page, onClick }) {
+  const doc = page.content;
 
-export default function Page() {
   return (
-    <Div>
-      <Editor />
-    </Div>
+    <article onClick={onClick}>
+      <Node node={doc} />
+    </article>
   );
 }
-
-const Div = styled.div`
-  width: 52rem;
-  max-width: 100%;
-`;
