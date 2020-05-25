@@ -88,6 +88,8 @@ button {
 nav {
   & > *:first-child {
     font-weight: $font-bold;
+    font-size: $size-5;
+    text-decoration: none;
   }
 
   a {

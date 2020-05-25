@@ -11,5 +11,6 @@ export default function Page() {
 }
 
 const Div = styled.div`
-  max-width: 52rem;
+  width: 52rem;
+  max-width: 100%;
 `;
