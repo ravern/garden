@@ -1,4 +1,5 @@
 import "prosemirror-view/style/prosemirror.css";
+import "~/web/styles/index.scss";
 import "@reach/dialog/styles.css";
 
 import { ApolloProvider } from "@apollo/react-hooks";
@@ -46,7 +47,6 @@ export default function App({ Component, pageProps }) {
       </Head>
       <ApolloProvider client={client}>
         <ThemeProvider theme={theme}>
-          <Styles />
           <Layout>
             <Component {...pageProps} />
           </Layout>

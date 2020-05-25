@@ -1,54 +1,37 @@
-import { useQuery } from "@apollo/react-hooks";
+import styled from "@emotion/styled";
 import NextLink from "next/link";
-import { useState } from "react";
 
-import Stack from "~/web/components/core/Stack";
-import CurrentUserQuery from "~/web/graphql/CurrentUserQuery";
-
-import SignInDialog from "./components/SignInDialog";
-import SignUpDialog from "./components/SignUpDialog";
+import { BREAKPOINT_1, SIZE_2 } from "~/web/constants/theme";
 
 export default function NavigationBar() {
-  const { data } = useQuery(CurrentUserQuery);
-  const currentUser = data?.currentUser;
-
-  const [isSignUpDialogOpen, setIsSignUpDialogOpen] = useState(false);
-  const [isSignInDialogOpen, setIsSignInDialogOpen] = useState(false);
-
   return (
-    <>
-      <Stack gap={2}>
-        <Stack gap={2} alignItems="center" flex={1}>
-          <NextLink href="/">
-            <h1>{"Ravern's Working Notes"}</h1>
-          </NextLink>
-          <NextLink href="/">
-            <a>About these pages</a>
-          </NextLink>
-        </Stack>
-        <Stack gap={2} alignItems="center">
-          <NextLink href="/">
-            <a>Settings</a>
-          </NextLink>
-          {currentUser && currentUser.username}
-          {!currentUser && (
-            <>
-              <button onClick={() => setIsSignInDialogOpen(true)}>
-                Sign in
-              </button>
-              <button onClick={() => setIsSignUpDialogOpen(true)}>
-                Sign up
-              </button>
-            </>
-          )}
-        </Stack>
-      </Stack>
-      {isSignUpDialogOpen && (
-        <SignUpDialog onDismiss={() => setIsSignUpDialogOpen(false)} />
-      )}
-      {isSignInDialogOpen && (
-        <SignInDialog onDismiss={() => setIsSignInDialogOpen(false)} />
-      )}
-    </>
+    <Nav>
+      <NextLink href="/">
+        <a>{"John's Working Notes"}</a>
+      </NextLink>
+      <NextLink href="/">
+        <a>About these pages</a>
+      </NextLink>
+    </Nav>
   );
 }
+
+const Nav = styled.nav`
+  display: flex;
+  flex-direction: column;
+
+  & > * + * {
+    margin-top: ${SIZE_2};
+  }
+
+  @media only screen and (max-width: ${BREAKPOINT_1}) {
+    & {
+      flex-direction: row;
+    }
+
+    & > * + * {
+      margin-top: 0;
+      margin-left: ${SIZE_2};
+    }
+  }
+`;

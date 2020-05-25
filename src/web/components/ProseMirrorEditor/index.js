@@ -1,6 +1,7 @@
-import schema from "~/models/schema";
 import fetch from "isomorphic-unfetch";
 import { useEffect, useRef } from "react";
+
+import schema from "~/models/schema";
 
 import { buildView } from "./view";
 
@@ -26,5 +27,5 @@ export default function ProseMirrorEditor() {
     };
   }, [editor, view]);
 
-  return <article ref={editor} />;
+  return <div ref={editor} />;
 }

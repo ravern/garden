@@ -1,8 +1,10 @@
-import styled, { Box, css } from "@xstyled/styled-components";
+import styled, { Box as XstyledBox, css } from "@xstyled/styled-components";
 
 import ignoreStyledProps from "~/web/helpers/ignoreStyledProps";
 
-const Stack = styled(ignoreStyledProps(Box, ["variant", "gap"]))`
+const Box = ignoreStyledProps(XstyledBox, ["variant", "gap"]);
+
+const Stack = styled(Box)`
   ${({ variant, gap }) => {
     if (variant === "column") {
       return css`
