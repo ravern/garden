@@ -20,3 +20,20 @@ cd collab && yarn dev
 cd web && yarn dev
 cd models && yarn dev
 ```
+
+## Deployment
+
+[Fly](https://fly.io) is used for deployment, although any service that supports deploying Docker containers should work. Run the following commands to get the app and environment set up with Fly.
+
+```bash
+flyctl apps create
+flyctl secrets set BCRYPT_SALT_ROUNDS=10
+# set the rest of the secrets from the `.env` file
+```
+
+To deploy the app, clean the current directory first and then initiate the deployment to Fly.
+
+```bash
+yarn clean
+flyctl deploy
+```
